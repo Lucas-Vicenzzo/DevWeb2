@@ -1,0 +1,27 @@
+[
+  {
+    "pergunta": "Qual a idade do professor Varela?",
+    "alternativas": ["30 Anos", "32 Anos", "34 Anos", "36 Anos", "38 Anos"],
+    "resposta": 3
+  },
+  {
+    "pergunta": "Qual o nome do primeiro computador eletrônico?",
+    "alternativas": [
+      "ENIAC",
+      "IBM 360",
+      "Apple I",
+      "Altair 8800"
+    ],
+    "resposta": 0
+  },
+  {
+    "pergunta": "Qual o nome do primeiro computador pessoal?",
+    "alternativas": [
+      "ENIAC",
+      "IBM 360",
+      "Apple I",
+      "Altair 8800"
+    ],
+    "resposta": 3
+  }
+]
