@@ -1,0 +1,36 @@
+.lucas-todo-list {
+    box-sizing: border-box;
+
+    & * {
+        box-sizing: border-box;
+    }
+
+    & .action-bar {
+        border: solid 1px;
+        display: flex;
+
+    & > * {
+        font-size: 1.25rem;
+        padding: 0.5em;
+    }
+        & input {
+            flex-grow: 1;
+            outline: none;
+        }
+
+    }
+
+    & .list {
+        border: solid 1px;
+
+        & > * {
+            padding: 0.5em;
+            display: flex;
+
+            & > span {
+                flex-grow: 1;
+            }
+        }
+    }
+
+}
