@@ -30,13 +30,35 @@ function createItem(labelText) {
     const checkbox = document.createElement("input")
     const btDelete = document.createElement("button")
     const label = document.createElement("span")
+    const editButton = document.createElement("button")
 
     checkbox.type = "checkbox"
     label.textContent = labelText
     btDelete.textContent = "Excluir"
-    item.append(checkbox, label, btDelete)
+    editButton.textContent = "Editar"
+    item.append(checkbox, label, editButton, btDelete)
 
-    return { item, checkbox, label, btDelete }
+    return { item, checkbox, label, btDelete, editButton }
+}
+
+function editItem(label, item, editButton) {
+    const editInput = document.createElement("input")
+    const applyButton = document.createElement("button")
+    applyButton.textContent = "Aplicar"
+    item.appendChild(editInput)
+    item.appendChild(applyButton)
+    editButton.style.display = "none"
+    applyButton.addEventListener("click", () => {
+        if (editInput.value.trim() === "") {
+            return
+        }
+        label.textContent = editInput.value.trim()
+        editButton.style.display = "inline"
+        applyButton.remove()
+        editInput.remove()
+        
+
+    })
 }
 
 export default function(rootElement) {
@@ -48,17 +70,17 @@ export default function(rootElement) {
     rootElement.append(actionBar, list)
 
     const addNewItem = () => {
-        if (input.value === "") {
-            alert('adicione alguma coisa')
+        if (input.value.trim() === "") {
             return
         }
-        const {item, btDelete} = createItem(input.value)
-        input.value = ""
+        const {item, editButton, btDelete, label} = createItem(input.value.trim())
         list.append(item)
 
         btDelete.addEventListener("click", () => {
             item.remove()
         })
+
+        editButton.addEventListener("click", () => editItem(label, item, editButton))
     }
 
     input.addEventListener("keydown", ({ key }) => key === 'Enter' && addNewItem())
