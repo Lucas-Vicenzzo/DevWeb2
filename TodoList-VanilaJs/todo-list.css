@@ -23,7 +23,7 @@
     & .list {
         border: solid 1px;
 
-        & > * {
+        & > div {
             padding: 0.5em;
             display: flex;
 
@@ -33,4 +33,10 @@
         }
     }
 
+
+}
+
+.checked {
+    text-decoration: line-through;
+    opacity: 0.5;
 }

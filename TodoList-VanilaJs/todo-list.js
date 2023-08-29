@@ -64,7 +64,7 @@ function editItem(label, item, editButton) {
 export default function(rootElement) {
     if (!(rootElement instanceof HTMLElement)) return
     createLinkStyle()
-    const { actionBar, addButton, input } = createAction()
+    const {actionBar, addButton, input } = createAction()
     const list = createList()
     rootElement.className = "lucas-todo-list"
     rootElement.append(actionBar, list)
@@ -73,7 +73,7 @@ export default function(rootElement) {
         if (input.value.trim() === "") {
             return
         }
-        const {item, editButton, btDelete, label} = createItem(input.value.trim())
+        const {item, checkbox, editButton, btDelete, label} = createItem(input.value.trim())
         list.append(item)
 
         btDelete.addEventListener("click", () => {
@@ -81,6 +81,15 @@ export default function(rootElement) {
         })
 
         editButton.addEventListener("click", () => editItem(label, item, editButton))
+
+        checkbox.addEventListener("change", () => {
+            item.classList.toggle("checked", checkbox.checked)
+            if (checkbox.checked) {
+                editButton.disabled = true; 
+            } else {
+                editButton.disabled = false;
+            }
+        })
     }
 
     input.addEventListener("keydown", ({ key }) => key === 'Enter' && addNewItem())
