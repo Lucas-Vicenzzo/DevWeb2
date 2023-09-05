@@ -1,0 +1,27 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    gap: 20px
+}
+
+main div {
+    padding: 20px;
+    background-color: blanchedalmond;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+}
+
+
+main div:hover {
+    transform: scale(1.2);
+}
+a:hover{
+    transform: scale(1.2);
+}
