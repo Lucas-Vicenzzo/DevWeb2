@@ -16,26 +16,29 @@
             background-color: rgba(0, 0, 0, 0.5);
             display: grid;
             place-items: center;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(5px);
+            visibility: hidden;
+            opacity: 0;
+            transition: .3s;
         }
 
         .modal.show {
             visibility: visible;
             opacity: 1;
         }
-        .modal.show .window {
-            transform: translateY(0)
-        }
+
         .modal .window {
             background-color: white;
             width: 25rem;
             position: relative;
             border-radius: 5px;
-            transform: translateY(100vw);
             transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
             transition-duration: 1s;
         }
-
+        .modal.show .window {
+        transform: translateY(0rem);
+        opacity: 1;
+    }   
 
         .modal .content {
             padding: 2rem;
@@ -107,13 +110,12 @@
     </div>
     <script>
         const modal =  document.querySelector(".modal")
-        const modalWindow = document.querySelector(".window")
-        const showModalBtn = document.querySelectorAll(".showModal")
         const closeModal = modal.querySelector('.close')
+        const showModalBtn = document.querySelectorAll(".showModal")
 
-        showModalBtn.forEach(bt => bt.addEventListener('click', modal.className.add('show')))
-        closeModal.forEact(bt => bt.addEventListener('click', modal.className.remove('show')))
-    </script>
+        showModalBtn.forEach(bt => bt.addEventListener('click', () => modal.classList.add('show')))
+        closeModal.addEventListener('click', () => modal.classList.remove('show' ))
+    </script>   
     <div class="paragraph">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est minima voluptas molestiae debitis sit neque ab? Ipsa in perspiciatis repellat aut? Magni reprehenderit cupiditate illo possimus at ex labore animi.</p>
         <p>Recusandae possimus corporis sint explicabo natus dolor nesciunt aut alias enim nisi. Illum natus quaerat molestias eligendi doloribus nostrum fuga id veritatis? Consectetur, distinctio quos deleniti saepe doloremque dignissimos eos!</p>
