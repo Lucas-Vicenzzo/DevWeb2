@@ -1,0 +1,76 @@
+*{
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+main {
+    columns: 4;
+}
+
+
+.main-action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e5e5e5;
+    gap: 0.5rem;
+}
+
+.main-action-bar .search {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-grow: 1;
+}
+.search input {
+    flex-grow: 1;
+    padding: 0.5em;
+}
+
+.tile {
+    border: 1px solid;
+    padding: 1em;
+    border-radius: 5px;
+    margin: .25em;
+    break-inside: avoid-column;
+}
+
+.form-add {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+.form-add > div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-add > div > label {
+    width: 100%;
+}
+
+.form-add > div:has(button):has(input) {
+    width: 100%;
+    & input {
+        width: 85%;
+    }
+}
+
+.form-add input {
+    width: 85%;
+    flex-grow: 1;
+}
+
+.form-add > div.actions {
+    display: flex;
+    gap: 0.25rem;
+    justify-content: flex-end;
+}
