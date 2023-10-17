@@ -1,0 +1,34 @@
+.pending::before {
+        font-family: 'material-symbols-outlined';
+        content: "autorenew";
+        color: #F1c40f;
+}
+
+.synced::before {
+        font-family: 'material-symbols-outlined';
+        content: "check_circle";
+        color: #2ecc71;
+}
+
+.error::before {
+        font-family: 'material-symbols-outlined';
+        content: "error";
+        color: #f00;
+}
+
+
+li {
+    display: flex;
+    gap: .5rem;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+
+li button {
+    background-color: #f1f1f1;
+    padding: 8px 12px;
+    /* background-color: transparent; */
+    border: 0;
+    border-radius: 10px;
+}
