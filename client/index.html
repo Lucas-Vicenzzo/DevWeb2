@@ -1,65 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
-    <script async defer src="main.js"></script>
-    <title>Agenda de Telefone</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda Tel</title>
+  <link rel="stylesheet" href="main.css">
+  <script async defer src="main.js"></script>
 </head>
+
 <body>
-
-    <header>
-        <h1>Agenda de Telefone</h1>
-        <div class="main-action-bar">
-        <div class="search">
-            <button>P</button>
-            <input type="text" name="" id="">
-        </div>
-        <button>Adicionar</button>
+  <header>
+    <h1>Agenda Marota</h1>
+    <div class="main-action-bar">
+      <div class="search">
+        <input>
+        <button>P</button>
+        <button>ADD</button>
+      </div>
     </div>
-    </header>
+  </header>
 
-    <template>
-        <form  class="form-add tile" action="">
-            <div>
-                <label for="name">Nome Completo</label>
-                <input type="text" id="name" name="name">
-            </div>
-            <div>
-                <label for="phone">Telefone</label>
-                <input type="tel" id="phone" name="phone">
-                <button>+</button>
-            </div>
-            <div>
-                <label for="adress">Endereço</label>
-                <input type="tel" id="adress" name="adress">
-                <button>+</button>
-            </div>
-            <div class="actions">
-                <!-- <button class="bt-action-change">Editar</button> -->
-                <button class="bt-action-add">Adicionar Contato</button>
-            </div>
-        </form>
-    
-    </template>
-    <main>
-        <div class="person tile">
-            <div class="person-name">
-                <h2>Nome Completo</h2>
-            </div>
-            <div class="person-phone">
-                <h2>Telefone</h2>
-            </div>
-            <div class="person-adress">
-                <h2>Endereço</h2>
-            </div>
-            <div class="actions">
-                <button class="bt-action-change">Editar</button>
-                <button class="bt-action-delete">Excluir</button>
-            </div>
+  <main>
+      <form class="form-add tile">
+        <div>
+          <label for="name">Nome Completo</label>
+          <input type="text" id="name" name="name">
         </div>
-    </main>
-
+        <div>
+          <label for="phone">Telefone</label>
+          <input type="text" id="phone" name="phone">
+          <button>+</button>
+        </div>
+        <div>
+          <label for="address">Endereço</label>
+          <input type="text" id="address" name="address">
+          <button>+</button>
+        </div>
+        <div class="form-action-bar">
+          <!-- <button class="bt-action-change">Alterar</button> -->
+          <button class="bt-action-add">Adicionar</button>
+        </div>
+      </form>
+  
+    <div class="person tile">
+      <h2>Nome da Pessoa</h2>
+      <div>
+        <label>Telefone</label>
+        <div>
+          <span>47 99999 9999</span>
+          <span>47 99999 9999</span>
+          <span>47 99999 9999</span>
+          <span>47 99999 9999</span>
+          <span>47 99999 9999</span>
+        </div>
+      </div>
+      <div>
+        <label>Endereços</label>
+        <div>
+          <span>aslkf adlaksj dlkasj dlkasdjasljadslk </span>
+          <span>KJDF hkajhakjdh fakdfj sakdf</span>
+          <span>KJDF hkajhakjdh fakdfj sakdfsJK aksjdf hsdk</span>
+          <span>KJDF hkajhakjdh fakdfj sakdfsJK aksjdf sak dfbksadjf</span>
+        </div>
+      </div>
+      <div class="form-action-bar">
+        <button class="bt-action-change">Alterar</button>
+        <button class="bt-action-delete">Excluir</button>
+      </div>
+    </div>
+  </main>
 </body>
+
 </html>
