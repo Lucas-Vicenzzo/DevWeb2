@@ -8,6 +8,7 @@ type TProps = {
 export default function (props: TProps) {
   const { todolist, setTodolist } = props
   const [currentItem, setCurrentItem] = useState<number | null>(null)
+  const [icon, setIcon] = useState<string>('synced');
 
   const updateInputFn = (event: KeyboardEvent<HTMLInputElement>) => {
     const value = event.currentTarget.value
@@ -18,6 +19,7 @@ export default function (props: TProps) {
   }
 
   const removeItem = (index: number) => {
+    setIcon('error')
     const newTodolist = todolist.filter((_, key) => key !== index)
     setTodolist(newTodolist)
     localStorage.setItem('todolist', JSON.stringify(newTodolist))
@@ -34,7 +36,7 @@ export default function (props: TProps) {
       {/* <li className="synced">synced</li> */}
       {/* <li className="error">error</li> */}
       {todolist.map((todo, key) =>
-        <li key={key} className="synced">
+        <li key={key} className={icon}>
           <button onClick={() => removeItem(key)}>remove</button>
           <button onClick={() => setCurrentItem(key)}>update</button>
           {key === currentItem

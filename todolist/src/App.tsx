@@ -2,7 +2,7 @@ import { useState } from "react"
 import Header from "./Header"
 import Input from "./Input"
 import List from "./List"
-import './App.css'
+import './App.scss'
 
 export default function App() {
   const [todolist, setTodolist] = useState<string[]>(
