@@ -1,65 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
-    <script async defer src="main.js"></script>
-    <title>Agenda de Telefone</title>
-</head>
-<body>
-
-    <header>
-        <h1>Agenda de Telefone</h1>
-        <div class="main-action-bar">
-        <div class="search">
-            <button>P</button>
-            <input type="text" name="" id="">
-        </div>
-        <button>Adicionar</button>
-    </div>
-    </header>
-
-    <template>
-        <form  class="form-add tile" action="">
-            <div>
-                <label for="name">Nome Completo</label>
-                <input type="text" id="name" name="name">
-            </div>
-            <div>
-                <label for="phone">Telefone</label>
-                <input type="tel" id="phone" name="phone">
-                <button>+</button>
-            </div>
-            <div>
-                <label for="adress">Endereço</label>
-                <input type="tel" id="adress" name="adress">
-                <button>+</button>
-            </div>
-            <div class="actions">
-                <!-- <button class="bt-action-change">Editar</button> -->
-                <button class="bt-action-add">Adicionar Contato</button>
-            </div>
-        </form>
-    
-    </template>
-    <main>
-        <div class="person tile">
-            <div class="person-name">
-                <h2>Nome Completo</h2>
-            </div>
-            <div class="person-phone">
-                <h2>Telefone</h2>
-            </div>
-            <div class="person-adress">
-                <h2>Endereço</h2>
-            </div>
-            <div class="actions">
-                <button class="bt-action-change">Editar</button>
-                <button class="bt-action-delete">Excluir</button>
-            </div>
-        </div>
-    </main>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
