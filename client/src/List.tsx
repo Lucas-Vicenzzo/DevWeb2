@@ -1,29 +1,41 @@
 import { KeyboardEvent, MouseEvent } from "react"
 import { TTodoRestItem } from "./App"
+import * as dateFns from 'date-fns'
 
 type TProps = {
   todolist: TTodoRestItem[],
-  setTodolist: (todolist: TTodoRestItem[]) => void
+  setTodolist: (todolist: TTodoRestItem[]) => void,
+  setSyncStateIcon: (syncStateIcon: string) => void
 }
 
-export default function (props: TProps) {
-  const { todolist, setTodolist } = props
+export default function List (props: TProps) {
+  const { todolist, setTodolist, setSyncStateIcon } = props
+
+  async function updateTodoList() {
+    await fetch("http://localhost:3000/item")
+    .then(response => response.json())
+    .then(data => setTodolist(data))
+    setSyncStateIcon('synced')
+  }
 
   const removeItem = async (event: MouseEvent<HTMLButtonElement>) => {
     const id = Number(event.currentTarget.dataset.id) as number
     const li = event.currentTarget.closest('li') as HTMLLIElement
-    li.className = 'pending'
+    props.setSyncStateIcon('pending')
+    li.className = 'deleting'
     await fetch(`http://localhost:3000/item/${id}`, { method: 'DELETE' })
-    const newTodolist = todolist.filter((val, _key) => val.id !== id)
-    setTodolist(newTodolist)
+    li.className = 'deleted'
+    setTimeout(() => {
+      setTodolist(todolist.filter(todo => todo.id !== id))
+      updateTodoList()
+    }, 300)
   }
 
   const keyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      const li = event.currentTarget.closest('li') as HTMLLIElement
-      li.className = 'pending'
       const value = event.currentTarget.value
       const id = event.currentTarget.dataset.id
+      props.setSyncStateIcon('pending')
       const request = await fetch(`http://localhost:3000/item/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -31,19 +43,19 @@ export default function (props: TProps) {
       })
       const response = await request.json()
       console.log(response)
-      li.className = 'synced'
+      props.setSyncStateIcon('synced')
     }
   }
 
   return <>
     <ul>
-      {/* <li className="pending">pending</li> */}
-      {/* <li className="synced">synced</li> */}
-      {/* <li className="error">error</li> */}
-      {todolist.map((todo, _key) =>
-        <li ref={todo.ref} key={todo.id} data-id={todo.id} className={todo.id < 0 ? "pending" : "synced"}>
-          <button data-id={todo.id} onClick={removeItem}>remove</button>
+      {todolist.map((todo) =>
+        <li key={todo.id} data-id={todo.id} className={todo.id < 0 ? "pending" : "synced"}>
           <input data-id={todo.id} defaultValue={todo.text} onKeyDown={keyDown} />
+          <button data-id={todo.id} onClick={removeItem}>
+            <span>delete</span>
+          </button>
+          <p>{todo.date === 'Agora a pouco' ? 'Agora a pouco' : dateFns.format(dateFns.parseISO(todo.date), 'dd/MM - HH:mm')}</p>
         </li>
       )}
     </ul>

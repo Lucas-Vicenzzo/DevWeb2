@@ -1,35 +1,47 @@
-import { KeyboardEvent, useRef } from "react"
+import { KeyboardEvent, useState } from "react"
 import { TTodoRestItem } from "./App"
 
 type TProps = {
   todolist: TTodoRestItem[],
-  setTodolist: (todolist: TTodoRestItem[]) => void
+  setTodolist: (todolist: TTodoRestItem[]) => void,
+  setSyncStateIcon: (syncStateIcon: string) => void
 }
 
-export default function (props: TProps) {
-  const { todolist, setTodolist } = props
+export default function Input (props: TProps) {
+  const { todolist, setTodolist, setSyncStateIcon } = props
+  const [currentId, setCurrentId] = useState(1)
 
-  const ref = useRef<HTMLLIElement>(null)
-  const onKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      const value = event.currentTarget.value
-      event.currentTarget.value = ''
+  async function updateTodoList() {
+    await fetch("http://localhost:3000/item")
+    .then(response => response.json())
+    .then(data => setTodolist(data))
+    setSyncStateIcon('synced')
+  }
 
-      const newTodolist = [{ id: -1, text: value, ref }, ...todolist]
-      setTodolist(newTodolist)
-
-      const request = await fetch("http://localhost:3000/item", {
+  async function createTodoItem(value: string) {
+    await fetch("http://localhost:3000/item", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ todo: value })
       })
-      const response = await request.json()
+      updateTodoList()
+  }
 
-      if (ref.current) {
-        ref.current.dataset.id = response.lastID
-        ref.current.className = 'synced'
+  const onKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && event.currentTarget.value !== '') {
+      const value = event.currentTarget.value
+      event.currentTarget.value = ''
+      try {
+        setCurrentId(todolist[0].id)
+      } catch {
+        setCurrentId(1)
       }
-
+      setSyncStateIcon('pending');
+      const NewTodoList = [{ id: currentId, text: value, date: 'Agora a pouco' }, ...todolist]
+      createTodoItem(value)
+      setTodolist(NewTodoList)
+      setCurrentId(currentId + 1);
+      console.log(todolist)
     }
   }
 

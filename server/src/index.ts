@@ -12,12 +12,12 @@ app.use(cors())
 app.use(express.json())
 
 // ROTA PRINCIPAL
-app.get("/", (req, res) => res.send("Hello World!"))
+app.get("/", (_req, res) => res.send("Hello World!"))
 
 // BUSCAR TODAS OS DADOS
-app.get("/item", async (req, res) => {
+app.get("/item", async (_req, res) => {
   const db = await getDatabaseConnection()
-  const resp = await db.all("SELECT * FROM todo ORDER BY id DESC")
+  const resp = await db.all("SELECT * FROM todo ORDER BY date DESC")
   debug
     ? setTimeout(() => { res.json(resp) }, 1000 * debugTime)
     : res.json(resp)
@@ -37,7 +37,21 @@ app.get("/item/:id", async (req, res) => {
 app.post("/item", async (req, res) => {
   const { todo } = req.body
   const db = await getDatabaseConnection()
-  const resp = await db.run("INSERT INTO todo (text, date) VALUES (?, ?)", todo, Date.now())
+  
+  function formatTimestamp(timestamp: number): string {
+    const date = new Date(timestamp);
+    const year = date.getFullYear();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const day = ("0" + date.getDate()).slice(-2);
+    const hours = ("0" + date.getHours()).slice(-2);
+    const minutes = ("0" + date.getMinutes()).slice(-2);
+    const seconds = ("0" + date.getSeconds()).slice(-2);
+    const milliseconds = ("00" + date.getMilliseconds()).slice(-3);
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
+  }
+  // Uso
+  const date = formatTimestamp(Date.now());
+  const resp = await db.run("INSERT INTO todo (text, date) VALUES (?, ?)", todo, date)
   debug
     ? setTimeout(() => { res.json(resp) }, 1000 * debugTime)
     : res.json(resp)
@@ -78,6 +92,15 @@ app.delete("/item/:id", async (req, res) => {
   const { id } = req.params
   const db = await getDatabaseConnection()
   const resp = await db.run("DELETE FROM todo WHERE id = ?", id)
+  debug
+    ? setTimeout(() => { res.json(resp) }, 1000 * debugTime)
+    : res.json(resp)
+})
+
+// DELETAR TODOS OS DADOS
+app.delete("/item", async (_req, res) => {
+  const db = await getDatabaseConnection()
+  const resp = await db.run("DELETE FROM todo")
   debug
     ? setTimeout(() => { res.json(resp) }, 1000 * debugTime)
     : res.json(resp)
