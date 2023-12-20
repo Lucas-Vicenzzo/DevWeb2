@@ -130,6 +130,7 @@ ul {
 }
 
 li {
+
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -141,6 +142,15 @@ li {
   &:hover {
     background-color: rgba(0, 196, 167, 0.25);
   }
+
+  * {
+    font-size: 1rem;
+    background-color: transparent;
+    position: relative;
+    overflow: hidden;
+  }
+
+
 
   & input {
     flex-grow: 1;
@@ -159,69 +169,78 @@ li {
       cursor: text;
     }
   }
-}
 
-.input-action,
-li > * {
-  font-size: 1rem;
-  padding: .2rem 1rem;
-  background-color: transparent;
-  border-radius: 2px;
-  border: 1px solid rgba(0 0 0 / .5);
-  position: relative;
-  overflow: hidden;
-}
-
-li > span {
-  min-width: 250px;
-}
-
-li > p{
-  border: none;
-  outline: none;
-  color: var(--raisin-black);
-  opacity: 0.4;
-  font-size: 0.8em;
-  padding: 0;
-  margin: 0;
-}
-
-li button {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 1.5em;
-  aspect-ratio: 1;
-  border-radius: 10px;
-  font-size: 1.2em;
-  transition: all 0.3s ease-in-out;
-  border: none;
-
-  span {
-    font-family: 'Material Symbols Outlined';
-    z-index: 2;
-    background-color: transparent;
-  }
-  
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    height: 100%;
-    background-color: var(--error);
-    transition: .3s cubic-bezier(.51,.28,.4,.99);
-    transform: scale(0);
-    border-radius: 10px;
+  & p {
+    border: none;
+    outline: none;
+    color: var(--raisin-black);
+    opacity: 0.4;
+    font-size: 0.8em;
+    padding: 0;
+    margin: 0;
   }
 
-  &:hover {
-    color: var(--errorBackground);
-    &::before {
-      transform: scale(1);
+  & .actions {
+    display: flex;
+    flex-direction: row;
+
+    button {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      width: 1.5em;
+      aspect-ratio: 1;
+      border-radius: 10px;
+      font-size: 1.2em;
+      transition: all 0.3s ease-in-out;
+      border: none;
+    
+      & span {
+        font-family: 'Material Symbols Outlined';
+        z-index: 2;
+        background-color: transparent;
+      }
+      
+      &.deleteBtn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        background-color: var(--error);
+        transition: .3s cubic-bezier(.51,.28,.4,.99);
+        transform: scale(0);
+        border-radius: 10px;
+      }
+    
+      &.deleteBtn:hover {
+        color: var(--errorBackground);
+        &::before {
+          transform: scale(1);
+        }
+      }
+      &.editBtn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        background-color: var(--primary);
+        transition: .3s cubic-bezier(.51,.28,.4,.99);
+        transform: scale(0);
+        border-radius: 10px;
+      }
+    
+      &.editBtn:hover {
+        color: var(--backgrond);
+        &::before {
+          transform: scale(1);
+        }
+      }
     }
   }
 }
+
 h1 {
   font-weight: 800;
   color: rgb(0, 109, 109);
@@ -261,6 +280,10 @@ main {
   transition: all 0.3s ease-in-out;
   outline: 1px solid rgba(0, 0, 0, 0.1);
   border: none;
+  font-size: 1rem;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
 
   &:focus, &:hover {
     outline: 2px solid var(--primary);

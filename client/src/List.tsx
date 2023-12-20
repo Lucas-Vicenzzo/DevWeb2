@@ -47,14 +47,26 @@ export default function List (props: TProps) {
     }
   }
 
+  function handleEdit(event: MouseEvent<HTMLButtonElement>) {
+    const li = event.currentTarget.closest('li') as HTMLLIElement
+    const input = li.querySelector('input') as HTMLInputElement
+    li.className = 'editing'
+    input.focus()
+  }
+
   return <>
     <ul>
       {todolist.map((todo) =>
         <li key={todo.id} data-id={todo.id} className={todo.id < 0 ? "pending" : "synced"}>
           <input data-id={todo.id} defaultValue={todo.text} onKeyDown={keyDown} />
-          <button data-id={todo.id} onClick={removeItem}>
-            <span>delete</span>
-          </button>
+          <div className="actions">
+            <button data-id={todo.id} className="editBtn" onClick={handleEdit}>
+              <span>edit</span>
+            </button>
+            <button data-id={todo.id} onClick={removeItem} className="deleteBtn">
+              <span>delete</span>
+            </button>
+          </div>
           <p>{todo.date === 'Agora a pouco' ? 'Agora a pouco' : dateFns.format(dateFns.parseISO(todo.date), 'dd/MM - HH:mm')}</p>
         </li>
       )}

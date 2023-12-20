@@ -30,7 +30,7 @@ export default function App() {
         <Header syncStateIcon={syncStateIcon} setTodolist={setTodolist} setSyncStateIcon={setSyncStateIcon} />
         <Input setTodolist={setTodolist} todolist={todolist} setSyncStateIcon={setSyncStateIcon} />
         <List setTodolist={setTodolist} setSyncStateIcon={setSyncStateIcon} todolist={todolist} />
-        <Footer setTodolist={setTodolist} setSyncStateIcon={setSyncStateIcon} />
+        <Footer />
       </div>
     </main>
   )
