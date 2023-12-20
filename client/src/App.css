@@ -30,7 +30,18 @@
   }
 }
 
-
+@keyframes completeEdit {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+  
+}
 
 * {
   box-sizing: border-box;
@@ -54,7 +65,8 @@ header {
       display: inline-block;
       font-family: 'Material Symbols Outlined';
       content: "check_circle";
-      color: var(--synced);      
+      color: var(--synced);
+      animation: completeEdit 0.5s cubic-bezier(.77,.16,.14,1.28) 1;
     }
     
     &.pending::before {
@@ -167,6 +179,9 @@ li {
     &:focus {
       background-color: white;
       cursor: text;
+    }
+    &.done {
+      animation: completeEdit 0.5s cubic-bezier(.77,.16,.14,1.28) 1;
     }
   }
 

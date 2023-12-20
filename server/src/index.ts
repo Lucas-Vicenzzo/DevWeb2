@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import { getDatabaseConnection } from "./database"
+import { formatTimestamp } from "./helpers"
 
 const PORT = process.env.PORT ?? 3000
 const app = express()
@@ -37,18 +38,7 @@ app.get("/item/:id", async (req, res) => {
 app.post("/item", async (req, res) => {
   const { todo } = req.body
   const db = await getDatabaseConnection()
-  
-  function formatTimestamp(timestamp: number): string {
-    const date = new Date(timestamp);
-    const year = date.getFullYear();
-    const month = ("0" + (date.getMonth() + 1)).slice(-2);
-    const day = ("0" + date.getDate()).slice(-2);
-    const hours = ("0" + date.getHours()).slice(-2);
-    const minutes = ("0" + date.getMinutes()).slice(-2);
-    const seconds = ("0" + date.getSeconds()).slice(-2);
-    const milliseconds = ("00" + date.getMilliseconds()).slice(-3);
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
-  }
+
   // Uso
   const date = formatTimestamp(Date.now());
   const resp = await db.run("INSERT INTO todo (text, date) VALUES (?, ?)", todo, date)
@@ -61,8 +51,9 @@ app.post("/item", async (req, res) => {
 app.put("/item/:id", async (req, res) => {
   const { todo } = req.body
   const { id } = req.params
+  const date = formatTimestamp(Date.now());
   const db = await getDatabaseConnection()
-  const resp = await db.run("UPDATE todo SET text = ? WHERE id = ?", todo, id)
+  const resp = await db.run("UPDATE todo SET text = ?, date = ? WHERE id = ?", todo, date, id)
   debug
     ? setTimeout(() => { res.json(resp) }, 1000 * debugTime)
     : res.json(resp)
