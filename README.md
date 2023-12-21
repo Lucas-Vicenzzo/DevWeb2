@@ -6,8 +6,10 @@
 
 ### Funções adicionadas
 - Horário de cadastro do item
-- Atualização da página
+- Atualização da página (icone de chege do lado do direito, acima da caixa de cadastro)
 - Edição do item
+- Atualizar o Item Atualiza o Horário
+- Ordenzaçãp por data/horário
 
 ---
 ### Inicialização do Projeto
