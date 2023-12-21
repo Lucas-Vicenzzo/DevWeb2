@@ -50,11 +50,16 @@ export default function List(props: TProps) {
     if (event.key === "Enter") {
       const li = event.currentTarget.closest("li") as HTMLLIElement;
       const input = li.querySelector("input") as HTMLInputElement;
-      input.className = "done";
       input.blur();
-      const value = event.currentTarget.value;
-      const id = Number(event.currentTarget.dataset.id) as number;
-      updateItem(id, value);  
+      input.className = "done";
+      console.log(input.defaultValue);
+      if (event.currentTarget.value !== input.defaultValue) {
+        const value = event.currentTarget.value;
+        const id = Number(event.currentTarget.dataset.id) as number;
+        updateItem(id, value); 
+      } else {
+        console.log("não houve alteração");
+      }
     }
   };
 
@@ -62,7 +67,13 @@ export default function List(props: TProps) {
     const li = event.currentTarget.closest("li") as HTMLLIElement;
     const input = li.querySelector("input") as HTMLInputElement;
     input.classList.add("done");
-    updateItem(Number(event.currentTarget.dataset.id), input.value);
+    if (event.currentTarget.value !== input.defaultValue) {
+      const value = event.currentTarget.value;
+      const id = Number(event.currentTarget.dataset.id) as number;
+      updateItem(id, value); 
+    } else {
+      console.log("não houve alteração");
+    }
   }
 
   function handleEdit(event: MouseEvent<HTMLButtonElement>) {
